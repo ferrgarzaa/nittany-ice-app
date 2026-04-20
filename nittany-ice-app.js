@@ -1,83 +1,43 @@
-/**
- * Copyright 2026 ferrgarzaa
- * @license Apache-2.0, see LICENSE for full text.
- */
 import { LitElement, html, css } from "lit";
-import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
-import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
-/**
- * `nittany-ice-app`
- * 
- * @demo index.html
- * @element nittany-ice-app
- */
-export class NittanyIceApp extends DDDSuper(I18NMixin(LitElement)) {
+import "./nittany-ice-header.js";
+import "./nittany-ice-hero.js";
+import "./nittany-ice-cta.js";
+import "./nittany-ice-footer.js";
 
+export class NittanyIceApp extends LitElement {
   static get tag() {
     return "nittany-ice-app";
   }
 
-  constructor() {
-    super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/nittany-ice-app.ar.json", import.meta.url).href +
-        "/../",
-    });
-  }
-
-  // Lit reactive properties
-  static get properties() {
-    return {
-      ...super.properties,
-      title: { type: String },
-    };
-  }
-
-  // Lit scoped styles
   static get styles() {
-    return [super.styles,
-    css`
+    return css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
+        min-height: 100vh;
+        background: #0b1726;
+        color: white;
+        font-family: Arial, sans-serif;
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
       }
-      h3 span {
-        font-size: var(--nittany-ice-app-label-font-size, var(--ddd-font-size-s));
-      }
-    `];
+    `;
   }
 
-  // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
-  }
-
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
+      <main>
+        <nittany-ice-header></nittany-ice-header>
+        <nittany-ice-hero></nittany-ice-hero>
+        <nittany-ice-cta></nittany-ice-cta>
+        <nittany-ice-footer></nittany-ice-footer>
+      </main>
+    `;
   }
 }
 
-globalThis.customElements.define(NittanyIceApp.tag, NittanyIceApp);
+customElements.define("nittany-ice-app", NittanyIceApp);
