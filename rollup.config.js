@@ -1,53 +1,34 @@
-import nodeResolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
-import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
-import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
-import esbuild from 'rollup-plugin-esbuild';
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import { copy } from "@web/rollup-plugin-copy";
+import esbuild from "rollup-plugin-esbuild";
 
 export default {
-  input: 'index.html',
+  input: "nittany-ice-app.js",
   output: {
-    entryFileNames: '[hash].js',
-    chunkFileNames: '[hash].js',
-    assetFileNames: '[hash][extname]',
-    format: 'es',
-    dir: 'public',
+    dir: "dist",
+    format: "es",
+    sourcemap: true,
+    entryFileNames: "[name].js",
+    chunkFileNames: "chunks/[name]-[hash].js",
   },
   preserveEntrySignatures: false,
-
   plugins: [
-    /** Enable using HTML as rollup entrypoint */
-    html({
-      minify: true,
+    nodeResolve({
+      browser: true,
+      preferBuiltins: false,
+      dedupe: ["lit", "lit-element", "lit-html"],
     }),
-    /** Resolve bare module imports */
-    nodeResolve(),
-    /** Minify JS, compile JS to a lower language target */
     esbuild({
       minify: true,
-      target: ['chrome64', 'firefox67', 'safari11.1'],
+      target: ["chrome64", "firefox67", "safari13", "edge88"],
     }),
-    /** Bundle assets references via import.meta.url */
-    importMetaAssets(),
-    /** Minify html and css tagged template literals */
-    babel({
-      plugins: [
-        [
-          'babel-plugin-template-html-minifier',
-          {
-            modules: { lit: ['html', { name: 'css', encapsulation: 'style' }] },
-            failOnError: false,
-            strictCSS: true,
-            htmlMinifier: {
-              collapseWhitespace: true,
-              conservativeCollapse: true,
-              removeComments: true,
-              caseSensitive: true,
-              minifyCSS: true,
-            },
-          },
-        ],
+    copy({
+      patterns: [
+        "index.html",
+        "favicon.ico",
+        "assets/**/*",
       ],
+      rootDir: ".",
     }),
   ],
 };

@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 
 export class NittanyIceProgramCard extends LitElement {
+
   static get tag() {
     return "nittany-ice-program-card";
   }
@@ -49,13 +50,13 @@ export class NittanyIceProgramCard extends LitElement {
       }
 
       .icon {
-        width: 46px;
-        height: 46px;
+        width: 48px;
+        height: 48px;
         display: grid;
         place-items: center;
         background: var(--wtra-surface-alt);
         border-radius: 12px;
-        font-size: 1.35rem;
+        font-size: 1.4rem;
         color: var(--wtra-accent);
       }
 
@@ -79,13 +80,13 @@ export class NittanyIceProgramCard extends LitElement {
         color: var(--wtra-accent);
         text-decoration: none;
         font-weight: 700;
-        font-size: 0.92rem;
+        font-size: 0.86rem;
         display: inline-flex;
         align-items: center;
         gap: 6px;
         margin-top: 4px;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
       }
 
       a:hover {
@@ -102,26 +103,50 @@ export class NittanyIceProgramCard extends LitElement {
     `;
   }
 
-  _go(e) {
-    if (!this.link) return;
-    const m = this.link.match(/[?&]page=([^&]+)/);
-    if (m) {
+  _pageFromLink() {
+    if (!this.link) {
+      return null;
+    }
+    const match = this.link.match(/[?&]page=([^&]+)/);
+    if (match) {
+      return match[1];
+    }
+    return null;
+  }
+
+  _onLinkClick(e) {
+    const page = this._pageFromLink();
+    if (page) {
       e.preventDefault();
       this.dispatchEvent(new CustomEvent("wtra-navigate", {
         bubbles: true,
         composed: true,
-        detail: { page: m[1] }
+        detail: { page }
       }));
     }
+  }
+
+  _renderIcon() {
+    if (!this.icon) {
+      return null;
+    }
+    return html`<div class="icon" aria-hidden="true">${this.icon}</div>`;
+  }
+
+  _renderLink() {
+    if (!this.link) {
+      return null;
+    }
+    return html`<a href=${this.link} @click=${this._onLinkClick}>${this.linktext} <span aria-hidden="true">→</span></a>`;
   }
 
   render() {
     return html`
       <article class="card">
-        ${this.icon ? html`<div class="icon" aria-hidden="true">${this.icon}</div>` : ""}
+        ${this._renderIcon()}
         <h3>${this.title}</h3>
         <p>${this.text}</p>
-        ${this.link ? html`<a href="${this.link}" @click="${this._go}">${this.linktext} <span aria-hidden="true">→</span></a>` : ""}
+        ${this._renderLink()}
       </article>
     `;
   }
