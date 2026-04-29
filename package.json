@@ -10,6 +10,7 @@
     "serve": "web-dev-server --root-dir dist --node-resolve --open"
   },
   "dependencies": {
+    "@haxtheweb/d-d-d": "^25.0.0",
     "lit": "^3.1.0"
   },
   "devDependencies": {
