@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceProgramCard extends LitElement {
+export class NittanyIceProgramCard extends DDD {
 
   static get tag() {
     return "nittany-ice-program-card";
@@ -26,81 +27,68 @@ export class NittanyIceProgramCard extends LitElement {
   }
 
   static get styles() {
-    return css`
-      :host {
-        display: block;
-      }
+    return [
+      super.styles,
+      css`
+        :host {
+          display: block;
+          font-family: var(--ddd-font-primary);
+        }
 
-      .card {
-        background: var(--wtra-surface);
-        border: 1px solid var(--wtra-border);
-        border-radius: var(--wtra-radius);
-        padding: 28px 26px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        box-shadow: var(--wtra-shadow);
-        transition: transform 0.18s ease, border-color 0.18s ease;
-      }
+        .card {
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-radius: var(--ddd-radius-sm);
+          padding: var(--ddd-spacing-5);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: var(--ddd-spacing-3);
+        }
 
-      .card:hover {
-        transform: translateY(-3px);
-        border-color: var(--wtra-accent);
-      }
+        .icon {
+          width: 40px;
+          height: 40px;
+          background-color: var(--ddd-theme-default-shrineLight);
+          color: var(--ddd-theme-default-original87Pink);
+          border-radius: var(--ddd-radius-sm);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: var(--ddd-font-size-s);
+        }
 
-      .icon {
-        width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
-        background: var(--wtra-surface-alt);
-        border-radius: 12px;
-        font-size: 1.4rem;
-        color: var(--wtra-accent);
-      }
+        h3 {
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-ms);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
+          margin: 0;
+        }
 
-      h3 {
-        font-family: var(--wtra-font-display);
-        margin: 4px 0 0;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--wtra-text);
-        letter-spacing: -0.005em;
-      }
+        p {
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
+          line-height: var(--ddd-lh-150);
+          margin: 0;
+          flex: 1;
+        }
 
-      p {
-        margin: 0;
-        color: var(--wtra-text-muted);
-        line-height: 1.6;
-        flex: 1;
-      }
+        a {
+          color: var(--ddd-theme-default-original87Pink);
+          text-decoration: none;
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-3xs);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
 
-      a {
-        color: var(--wtra-accent);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.86rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 4px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-      }
-
-      a:hover {
-        color: var(--wtra-accent-2);
-      }
-
-      a span {
-        transition: transform 0.18s ease;
-      }
-
-      a:hover span {
-        transform: translateX(4px);
-      }
-    `;
+        a:hover {
+          text-decoration: underline;
+        }
+      `
+    ];
   }
 
   _pageFromLink() {
@@ -130,14 +118,14 @@ export class NittanyIceProgramCard extends LitElement {
     if (!this.icon) {
       return null;
     }
-    return html`<div class="icon" aria-hidden="true">${this.icon}</div>`;
+    return html`<div class="icon">${this.icon}</div>`;
   }
 
   _renderLink() {
     if (!this.link) {
       return null;
     }
-    return html`<a href=${this.link} @click=${this._onLinkClick}>${this.linktext} <span aria-hidden="true">→</span></a>`;
+    return html`<a href=${this.link} @click=${this._onLinkClick}>${this.linktext} →</a>`;
   }
 
   render() {
@@ -152,4 +140,4 @@ export class NittanyIceProgramCard extends LitElement {
   }
 }
 
-customElements.define("nittany-ice-program-card", NittanyIceProgramCard);
+globalThis.customElements.define(NittanyIceProgramCard.tag, NittanyIceProgramCard);

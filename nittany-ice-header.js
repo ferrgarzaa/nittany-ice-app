@@ -1,7 +1,8 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 import "./nittany-ice-menu.js";
 
-export class NittanyIceHeader extends LitElement {
+export class NittanyIceHeader extends DDD {
 
   static get tag() {
     return "nittany-ice-header";
@@ -22,74 +23,69 @@ export class NittanyIceHeader extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
+          background-color: white;
+          border-bottom: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
           position: sticky;
           top: 0;
           z-index: 50;
-          background: var(--wtra-bg);
-          border-bottom: 1px solid var(--wtra-border);
         }
 
         header {
-          max-width: 1240px;
+          max-width: 1100px;
           margin: 0 auto;
+          padding: var(--ddd-spacing-3) var(--ddd-spacing-5);
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 14px 24px;
-          gap: 16px;
         }
 
         .brand {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: var(--ddd-spacing-3);
           background: none;
           border: none;
           padding: 0;
-          color: var(--wtra-text);
           cursor: pointer;
-          font-family: inherit;
+          font-family: var(--ddd-font-primary);
+          color: var(--ddd-theme-default-coalyGray);
         }
 
         .mark {
           width: 40px;
           height: 40px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--wtra-purple-deep), var(--wtra-green-deep));
-          display: grid;
-          place-items: center;
-          color: var(--wtra-cream);
-          font-family: var(--wtra-font-display);
-          font-weight: 700;
-          font-size: 1.05rem;
-          flex-shrink: 0;
-          box-shadow: inset 0 0 0 2px rgba(245, 239, 224, 0.15);
+          background-color: var(--ddd-theme-default-original87Pink);
+          color: white;
+          border-radius: var(--ddd-radius-circle);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-s);
         }
 
         .name {
           display: flex;
           flex-direction: column;
-          line-height: 1.05;
           text-align: left;
         }
 
         .name strong {
-          font-family: var(--wtra-font-display);
-          font-size: 1.08rem;
-          font-weight: 700;
-          letter-spacing: 0.005em;
-          color: var(--wtra-text);
+          font-size: var(--ddd-font-size-s);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
         }
 
         .name span {
-          font-size: 0.7rem;
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
           text-transform: uppercase;
-          letter-spacing: 0.18em;
-          color: var(--wtra-text-muted);
-          margin-top: 3px;
+          letter-spacing: 0.1em;
         }
 
         @media (max-width: 540px) {
@@ -113,8 +109,8 @@ export class NittanyIceHeader extends LitElement {
   render() {
     return html`
       <header>
-        <button class="brand" @click=${this._goHome} aria-label="Wildhorn TRA home">
-          <span class="mark" aria-hidden="true">W</span>
+        <button class="brand" @click=${this._goHome} aria-label="Go to home">
+          <span class="mark">W</span>
           <span class="name">
             <strong>${this.title}</strong>
             <span>${this.subtitle}</span>

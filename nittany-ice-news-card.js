@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceNewsCard extends LitElement {
+export class NittanyIceNewsCard extends DDD {
 
   static get tag() {
     return "nittany-ice-news-card";
@@ -29,32 +30,27 @@ export class NittanyIceNewsCard extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
+          font-family: var(--ddd-font-primary);
         }
 
         .card {
-          background: var(--wtra-surface);
-          border: 1px solid var(--wtra-border);
-          border-radius: var(--wtra-radius);
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-radius: var(--ddd-radius-sm);
           overflow: hidden;
           height: 100%;
           display: flex;
           flex-direction: column;
-          box-shadow: var(--wtra-shadow);
-          transition: transform 0.18s ease, border-color 0.18s ease;
-        }
-
-        .card:hover {
-          transform: translateY(-3px);
-          border-color: var(--wtra-accent);
         }
 
         .media {
           aspect-ratio: 16 / 10;
-          overflow: hidden;
-          background: var(--wtra-surface-alt);
+          background-color: var(--ddd-theme-default-shrineLight);
         }
 
         .media img {
@@ -62,67 +58,58 @@ export class NittanyIceNewsCard extends LitElement {
           height: 100%;
           object-fit: cover;
           display: block;
-          transition: transform 0.5s ease;
-        }
-
-        .card:hover .media img {
-          transform: scale(1.05);
         }
 
         .body {
-          padding: 22px 22px 24px;
+          padding: var(--ddd-spacing-4);
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: var(--ddd-spacing-2);
           flex: 1;
         }
 
         .meta {
           display: flex;
-          gap: 10px;
-          align-items: center;
-          font-size: 0.74rem;
-          color: var(--wtra-text-muted);
+          gap: var(--ddd-spacing-2);
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
           text-transform: uppercase;
-          letter-spacing: 0.14em;
-          font-weight: 600;
+          letter-spacing: 0.05em;
         }
 
         .meta .cat {
-          color: var(--wtra-accent);
-          font-weight: 700;
+          color: var(--ddd-theme-default-original87Pink);
+          font-weight: var(--ddd-font-weight-bold);
         }
 
         h3 {
-          font-family: var(--wtra-font-display);
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-ms);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
           margin: 0;
-          font-size: 1.18rem;
-          line-height: 1.3;
-          font-weight: 600;
-          color: var(--wtra-text);
-          letter-spacing: -0.005em;
+          line-height: var(--ddd-lh-120);
         }
 
         p {
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
+          line-height: var(--ddd-lh-150);
           margin: 0;
-          color: var(--wtra-text-muted);
-          line-height: 1.6;
-          font-size: 0.95rem;
           flex: 1;
         }
 
         a {
-          color: var(--wtra-accent);
-          font-weight: 700;
+          color: var(--ddd-theme-default-original87Pink);
           text-decoration: none;
-          font-size: 0.82rem;
-          margin-top: 6px;
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-3xs);
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
         }
 
         a:hover {
-          color: var(--wtra-accent-2);
+          text-decoration: underline;
         }
       `
     ];
@@ -155,11 +142,7 @@ export class NittanyIceNewsCard extends LitElement {
     if (!this.image) {
       return null;
     }
-    return html`
-      <div class="media">
-        <img src=${this.image} alt=${this.title} loading="lazy" />
-      </div>
-    `;
+    return html`<div class="media"><img src=${this.image} alt=${this.title} loading="lazy" /></div>`;
   }
 
   _renderCategory() {

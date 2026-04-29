@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceMenu extends LitElement {
+export class NittanyIceMenu extends DDD {
 
   static get tag() {
     return "nittany-ice-menu";
@@ -56,72 +57,44 @@ export class NittanyIceMenu extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
           position: relative;
+          font-family: var(--ddd-font-primary);
         }
 
         .toggle {
-          background: transparent;
-          border: 1px solid var(--wtra-border);
-          color: var(--wtra-text);
-          padding: 9px 14px;
-          border-radius: 999px;
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          color: var(--ddd-theme-default-coalyGray);
+          padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
+          border-radius: var(--ddd-radius-sm);
           cursor: pointer;
-          font: inherit;
-          font-size: 0.9rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-3xs);
+          font-weight: var(--ddd-font-weight-medium);
         }
 
         .toggle:hover {
-          background: var(--wtra-surface-alt);
-          border-color: var(--wtra-accent);
-        }
-
-        .bars {
-          display: inline-flex;
-          flex-direction: column;
-          gap: 3px;
-        }
-
-        .bars span {
-          width: 16px;
-          height: 2px;
-          background: var(--wtra-text);
-          border-radius: 2px;
-          transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        :host([open]) .bars span:nth-child(1) {
-          transform: translateY(5px) rotate(45deg);
-        }
-
-        :host([open]) .bars span:nth-child(2) {
-          opacity: 0;
-        }
-
-        :host([open]) .bars span:nth-child(3) {
-          transform: translateY(-5px) rotate(-45deg);
+          background-color: var(--ddd-theme-default-shrineLight);
         }
 
         nav {
           position: absolute;
           top: 100%;
           right: 0;
-          margin-top: 12px;
-          background: var(--wtra-surface);
-          border: 1px solid var(--wtra-border);
-          border-radius: var(--wtra-radius);
-          box-shadow: var(--wtra-shadow);
-          padding: 10px;
-          min-width: 240px;
+          margin-top: var(--ddd-spacing-2);
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-radius: var(--ddd-radius-sm);
+          padding: var(--ddd-spacing-2);
+          min-width: 220px;
           display: none;
           flex-direction: column;
-          gap: 2px;
         }
 
         :host([open]) nav {
@@ -129,38 +102,35 @@ export class NittanyIceMenu extends LitElement {
         }
 
         a {
-          color: var(--wtra-text);
+          color: var(--ddd-theme-default-coalyGray);
           text-decoration: none;
-          font-size: 0.95rem;
-          font-weight: 500;
-          padding: 10px 14px;
-          border-radius: 10px;
+          font-size: var(--ddd-font-size-3xs);
+          padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
+          border-radius: var(--ddd-radius-xs);
           display: block;
-          transition: background 0.15s ease, color 0.15s ease;
         }
 
         a:hover {
-          background: var(--wtra-surface-alt);
-          color: var(--wtra-accent);
+          background-color: var(--ddd-theme-default-shrineLight);
+          color: var(--ddd-theme-default-original87Pink);
         }
 
         a.active {
-          background: var(--wtra-surface-alt);
-          color: var(--wtra-accent);
-          font-weight: 600;
+          color: var(--ddd-theme-default-original87Pink);
+          font-weight: var(--ddd-font-weight-bold);
         }
 
         a.cta {
-          background: var(--wtra-accent);
-          color: var(--wtra-cream);
-          margin-top: 6px;
+          background-color: var(--ddd-theme-default-original87Pink);
+          color: white;
           text-align: center;
-          font-weight: 600;
+          margin-top: var(--ddd-spacing-2);
+          font-weight: var(--ddd-font-weight-bold);
         }
 
         a.cta:hover {
-          background: var(--wtra-purple);
-          color: var(--wtra-cream);
+          background-color: var(--ddd-theme-default-coalyGray);
+          color: white;
         }
 
         @media (min-width: 920px) {
@@ -175,19 +145,12 @@ export class NittanyIceMenu extends LitElement {
             padding: 0;
             background: transparent;
             border: none;
-            box-shadow: none;
-            gap: 4px;
-            align-items: center;
             min-width: 0;
-          }
-          a {
-            padding: 8px 12px;
+            gap: var(--ddd-spacing-1);
           }
           a.cta {
             margin-top: 0;
-            margin-left: 6px;
-            padding: 9px 18px;
-            border-radius: 999px;
+            margin-left: var(--ddd-spacing-2);
           }
         }
       `
@@ -235,16 +198,8 @@ export class NittanyIceMenu extends LitElement {
 
   render() {
     return html`
-      <button
-        class="toggle"
-        @click=${this._toggle}
-        aria-expanded=${this.open}
-        aria-label="Toggle menu"
-      >
-        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
-        Menu
-      </button>
-      <nav id="wtra-menu" aria-label="Primary">
+      <button class="toggle" @click=${this._toggle} aria-expanded=${this.open}>Menu</button>
+      <nav aria-label="Primary">
         ${this.items.map((item) => this._renderItem(item))}
       </nav>
     `;

@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceFooter extends LitElement {
+export class NittanyIceFooter extends DDD {
 
   static get tag() {
     return "nittany-ice-footer";
@@ -19,64 +20,46 @@ export class NittanyIceFooter extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
-          background: var(--wtra-earth);
-          color: var(--wtra-cream);
-          padding: 64px 24px 28px;
-          margin-top: 48px;
+          background-color: var(--ddd-theme-default-coalyGray);
+          color: white;
+          padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
+          margin-top: var(--ddd-spacing-8);
+          font-family: var(--ddd-font-primary);
         }
 
         .wrap {
-          max-width: 1240px;
+          max-width: 1100px;
           margin: 0 auto;
           display: grid;
           grid-template-columns: 1.4fr 1fr 1fr 1fr;
-          gap: 40px;
-        }
-
-        .brand {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
-          max-width: 340px;
-        }
-
-        .brand .mark {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--wtra-purple-soft), var(--wtra-green-soft));
-          display: grid;
-          place-items: center;
-          color: var(--wtra-earth);
-          font-family: var(--wtra-font-display);
-          font-weight: 700;
-          font-size: 1.1rem;
+          gap: var(--ddd-spacing-6);
         }
 
         .brand strong {
-          font-family: var(--wtra-font-display);
-          font-size: 1.2rem;
-          font-weight: 700;
-          letter-spacing: 0.005em;
+          font-size: var(--ddd-font-size-s);
+          font-weight: var(--ddd-font-weight-bold);
+          display: block;
+          margin-bottom: var(--ddd-spacing-2);
         }
 
         .brand p {
+          font-size: var(--ddd-font-size-3xs);
+          line-height: var(--ddd-lh-150);
           margin: 0;
-          color: rgba(245, 239, 224, 0.78);
-          line-height: 1.6;
-          font-size: 0.94rem;
+          opacity: 0.85;
         }
 
         .col h4 {
-          margin: 0 0 16px;
-          font-size: 0.78rem;
+          font-size: var(--ddd-font-size-3xs);
           text-transform: uppercase;
-          letter-spacing: 0.18em;
-          color: var(--wtra-purple-soft);
-          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: var(--ddd-theme-default-original87Pink);
+          margin: 0 0 var(--ddd-spacing-3);
+          font-weight: var(--ddd-font-weight-bold);
         }
 
         .col ul {
@@ -85,50 +68,40 @@ export class NittanyIceFooter extends LitElement {
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: var(--ddd-spacing-2);
         }
 
         .col a {
-          color: rgba(245, 239, 224, 0.85);
+          color: white;
           text-decoration: none;
-          font-size: 0.94rem;
-          transition: color 0.15s ease;
+          font-size: var(--ddd-font-size-3xs);
+          opacity: 0.85;
         }
 
         .col a:hover {
-          color: var(--wtra-cream);
+          opacity: 1;
+          text-decoration: underline;
         }
 
         .bottom {
-          max-width: 1240px;
-          margin: 48px auto 0;
-          padding-top: 24px;
-          border-top: 1px solid rgba(245, 239, 224, 0.15);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 12px;
-          font-size: 0.84rem;
-          color: rgba(245, 239, 224, 0.65);
+          max-width: 1100px;
+          margin: var(--ddd-spacing-6) auto 0;
+          padding-top: var(--ddd-spacing-4);
+          border-top: var(--ddd-border-sm);
+          border-top-color: rgba(255, 255, 255, 0.2);
+          font-size: var(--ddd-font-size-3xs);
+          opacity: 0.7;
         }
 
-        .bottom .meta {
-          display: flex;
-          gap: 18px;
-          flex-wrap: wrap;
-        }
-
-        @media (max-width: 880px) {
+        @media (max-width: 760px) {
           .wrap {
             grid-template-columns: 1fr 1fr;
           }
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 480px) {
           .wrap {
             grid-template-columns: 1fr;
-            gap: 32px;
           }
         }
       `
@@ -154,45 +127,33 @@ export class NittanyIceFooter extends LitElement {
     return html`
       <div class="wrap">
         <div class="brand">
-          <div class="mark" aria-hidden="true">W</div>
           <strong>Wildhorn Trail Running Association</strong>
-          <p>A nonprofit community of trail runners, coaches, and stewards racing the ridgelines of the Wildhorn region since 2011.</p>
+          <p>A nonprofit community of trail runners, coaches, and stewards in the Wildhorn region.</p>
         </div>
         <div class="col">
           <h4>Explore</h4>
           <ul>
             ${this._renderLink("Race calendar", "schedule")}
-            ${this._renderLink("Training programs", "training")}
+            ${this._renderLink("Training", "training")}
             ${this._renderLink("Youth & parents", "parent-info")}
-            ${this._renderLink("Race results", "results")}
           </ul>
         </div>
         <div class="col">
           <h4>Community</h4>
           <ul>
             ${this._renderLink("Become a member", "join")}
-            ${this._renderLink("Volunteer", "volunteer")}
-            ${this._renderLink("Sponsors", "sponsors")}
-            ${this._renderLink("Trail stewardship", "stewardship")}
+            ${this._renderLink("Contact", "contact")}
           </ul>
         </div>
         <div class="col">
           <h4>About</h4>
           <ul>
             ${this._renderLink("Our story", "about")}
-            ${this._renderLink("Board of directors", "board")}
-            ${this._renderLink("Contact", "contact")}
             ${this._renderLink("News", "news")}
           </ul>
         </div>
       </div>
-      <div class="bottom">
-        <span>© ${this.year} Wildhorn Trail Running Association · 501(c)(3) nonprofit</span>
-        <span class="meta">
-          <span>Wildhorn Region, USA</span>
-          <span>hello@wildhorntra.org</span>
-        </span>
-      </div>
+      <div class="bottom">© ${this.year} Wildhorn Trail Running Association</div>
     `;
   }
 }

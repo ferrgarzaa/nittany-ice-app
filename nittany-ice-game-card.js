@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceGameCard extends LitElement {
+export class NittanyIceGameCard extends DDD {
 
   static get tag() {
     return "nittany-ice-game-card";
@@ -27,88 +28,81 @@ export class NittanyIceGameCard extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
+          font-family: var(--ddd-font-primary);
         }
 
         .card {
-          background: var(--wtra-surface);
-          border: 1px solid var(--wtra-border);
-          border-radius: var(--wtra-radius);
-          padding: 24px;
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-left: var(--ddd-border-lg);
+          border-left-color: var(--ddd-theme-default-original87Pink);
+          border-radius: var(--ddd-radius-sm);
+          padding: var(--ddd-spacing-4);
           height: 100%;
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          box-shadow: var(--wtra-shadow);
-          transition: transform 0.18s ease, border-color 0.18s ease;
-          border-left: 4px solid var(--wtra-purple-deep);
-        }
-
-        .card:hover {
-          transform: translateY(-3px);
-          border-color: var(--wtra-accent);
-          border-left-color: var(--wtra-accent);
+          gap: var(--ddd-spacing-3);
         }
 
         .top {
           display: flex;
           justify-content: space-between;
           align-items: flex-start;
-          gap: 12px;
+          gap: var(--ddd-spacing-3);
         }
 
         .event {
-          font-family: var(--wtra-font-display);
-          font-size: 1.18rem;
-          font-weight: 600;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-ms);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
           margin: 0;
-          line-height: 1.25;
-          color: var(--wtra-text);
-          letter-spacing: -0.005em;
+          line-height: var(--ddd-lh-120);
         }
 
         .date {
-          font-size: 0.74rem;
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
           text-transform: uppercase;
-          letter-spacing: 0.14em;
-          color: var(--wtra-text-muted);
+          letter-spacing: 0.05em;
+          font-weight: var(--ddd-font-weight-bold);
           white-space: nowrap;
-          font-weight: 600;
         }
 
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 14px;
-          padding-top: 14px;
-          border-top: 1px solid var(--wtra-border);
+          gap: var(--ddd-spacing-3);
+          padding-top: var(--ddd-spacing-3);
+          border-top: var(--ddd-border-sm);
+          border-top-color: var(--ddd-theme-default-limestoneLight);
         }
 
         .label {
-          font-size: 0.72rem;
+          font-size: var(--ddd-font-size-3xs);
           text-transform: uppercase;
-          letter-spacing: 0.14em;
-          color: var(--wtra-text-muted);
-          margin-bottom: 6px;
-          font-weight: 600;
+          letter-spacing: 0.05em;
+          color: var(--ddd-theme-default-coalyGray);
+          margin-bottom: var(--ddd-spacing-1);
         }
 
         .val {
-          font-family: var(--wtra-font-display);
-          font-weight: 600;
-          font-size: 1.04rem;
-          color: var(--wtra-text);
+          font-size: var(--ddd-font-size-s);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
         }
 
         .footer {
-          margin-top: auto;
-          font-size: 0.85rem;
-          color: var(--wtra-accent);
-          font-weight: 700;
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-original87Pink);
+          font-weight: var(--ddd-font-weight-bold);
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.05em;
         }
       `
     ];

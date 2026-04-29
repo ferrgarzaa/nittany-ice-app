@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceStatBand extends LitElement {
+export class NittanyIceStatBand extends DDD {
 
   static get tag() {
     return "nittany-ice-stat-band";
@@ -19,63 +20,47 @@ export class NittanyIceStatBand extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
-          padding: 56px 24px;
-          background: var(--wtra-surface-alt);
-          border-top: 1px solid var(--wtra-border);
-          border-bottom: 1px solid var(--wtra-border);
+          background-color: white;
+          padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
+          border-top: var(--ddd-border-sm);
+          border-top-color: var(--ddd-theme-default-limestoneLight);
+          border-bottom: var(--ddd-border-sm);
+          border-bottom-color: var(--ddd-theme-default-limestoneLight);
+          font-family: var(--ddd-font-primary);
         }
 
         .grid {
-          max-width: 1240px;
+          max-width: 1100px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-          gap: 28px;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: var(--ddd-spacing-5);
           text-align: center;
         }
 
         .stat {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-          padding: 18px 12px;
-          border-left: 1px solid var(--wtra-border);
-        }
-
-        .stat:first-child {
-          border-left: none;
+          padding: var(--ddd-spacing-3);
         }
 
         .num {
-          font-family: var(--wtra-font-display);
-          font-size: clamp(2rem, 4vw, 2.6rem);
-          font-weight: 700;
-          color: var(--wtra-accent);
-          letter-spacing: -0.02em;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-xl);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-original87Pink);
           line-height: 1;
+          margin-bottom: var(--ddd-spacing-2);
         }
 
         .label {
-          font-size: 0.78rem;
+          font-size: var(--ddd-font-size-3xs);
           text-transform: uppercase;
-          letter-spacing: 0.16em;
-          color: var(--wtra-text-muted);
-          font-weight: 600;
-        }
-
-        @media (max-width: 720px) {
-          .stat {
-            border-left: none;
-            border-top: 1px solid var(--wtra-border);
-            padding-top: 22px;
-          }
-          .stat:first-child {
-            border-top: none;
-            padding-top: 0;
-          }
+          letter-spacing: 0.05em;
+          color: var(--ddd-theme-default-coalyGray);
+          font-weight: var(--ddd-font-weight-bold);
         }
       `
     ];

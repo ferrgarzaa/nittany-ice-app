@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceHero extends LitElement {
+export class NittanyIceHero extends DDD {
 
   static get tag() {
     return "nittany-ice-hero";
@@ -10,9 +11,9 @@ export class NittanyIceHero extends LitElement {
     super();
     this.eyebrow = "Trail Running Association";
     this.heading = "Run wild. Run free. Run together.";
-    this.copy = "We are a community of trail runners, coaches, and stewards racing the ridgelines of the Wildhorn region — and protecting them, mile by mile.";
-    this.image = "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1600&h=2000&q=85";
-    this.imagealt = "A trail runner ascending a mountain ridge at sunrise";
+    this.copy = "We are a community of trail runners, coaches, and stewards racing the ridgelines of the Wildhorn region.";
+    this.image = "https://i.pinimg.com/736x/91/ae/62/91ae626dba61c220cf4956f8e7115913.jpg";
+    this.imagealt = "A trail runner on a mountain ridge";
   }
 
   static get properties() {
@@ -27,131 +28,93 @@ export class NittanyIceHero extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
-          position: relative;
-          overflow: hidden;
-          isolation: isolate;
+          background-color: var(--ddd-theme-default-shrineMaxLight);
+          font-family: var(--ddd-font-primary);
         }
 
         .wrap {
-          position: relative;
-          max-width: 1240px;
+          max-width: 1100px;
           margin: 0 auto;
-          padding: 96px 24px 110px;
+          padding: var(--ddd-spacing-12) var(--ddd-spacing-5);
           display: grid;
-          grid-template-columns: 1.05fr 1fr;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--ddd-spacing-8);
           align-items: center;
-          gap: 56px;
-        }
-
-        .bg {
-          position: absolute;
-          inset: 0;
-          z-index: -2;
-          background:
-            radial-gradient(circle at 18% 28%, rgba(74, 58, 92, 0.32), transparent 55%),
-            radial-gradient(circle at 82% 72%, rgba(107, 68, 35, 0.22), transparent 55%),
-            var(--wtra-bg);
-        }
-
-        .ridges {
-          position: absolute;
-          inset: auto 0 0 0;
-          height: 70%;
-          z-index: -1;
-          opacity: 0.55;
-          pointer-events: none;
         }
 
         .eyebrow {
           text-transform: uppercase;
-          letter-spacing: 0.18em;
-          font-size: 0.78rem;
-          color: var(--wtra-accent);
-          font-weight: 700;
-          margin-bottom: 18px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-        }
-
-        .eyebrow::before {
-          content: "";
-          width: 28px;
-          height: 1px;
-          background: var(--wtra-accent);
-          display: inline-block;
+          letter-spacing: 0.1em;
+          font-size: var(--ddd-font-size-3xs);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-original87Pink);
+          margin-bottom: var(--ddd-spacing-3);
         }
 
         h1 {
-          font-family: var(--wtra-font-display);
-          font-size: clamp(2.4rem, 5.4vw, 4rem);
-          line-height: 1.04;
-          margin: 0 0 22px;
-          color: var(--wtra-text);
-          letter-spacing: -0.02em;
-          font-weight: 600;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-xxl);
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
+          margin: 0 0 var(--ddd-spacing-4);
+          line-height: var(--ddd-lh-110);
         }
 
         p {
-          max-width: 540px;
-          color: var(--wtra-text-muted);
-          font-size: 1.08rem;
-          line-height: 1.65;
-          margin: 0 0 30px;
+          font-size: var(--ddd-font-size-s);
+          color: var(--ddd-theme-default-coalyGray);
+          line-height: var(--ddd-lh-150);
+          margin: 0 0 var(--ddd-spacing-5);
         }
 
         .actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 12px;
+          gap: var(--ddd-spacing-3);
         }
 
         .btn {
-          font-family: inherit;
-          padding: 13px 22px;
-          border-radius: 999px;
-          font-weight: 600;
-          font-size: 0.96rem;
+          font-family: var(--ddd-font-primary);
+          padding: var(--ddd-spacing-3) var(--ddd-spacing-5);
+          border-radius: var(--ddd-radius-sm);
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-3xs);
           cursor: pointer;
-          border: 1px solid transparent;
           text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          transition: transform 0.15s ease, background 0.15s ease;
+          border: var(--ddd-border-sm);
+          display: inline-block;
         }
 
         .btn.primary {
-          background: var(--wtra-purple-deep);
-          color: var(--wtra-cream);
+          background-color: var(--ddd-theme-default-original87Pink);
+          color: white;
+          border-color: var(--ddd-theme-default-original87Pink);
         }
 
         .btn.primary:hover {
-          background: var(--wtra-purple);
-          transform: translateY(-1px);
+          background-color: var(--ddd-theme-default-coalyGray);
+          border-color: var(--ddd-theme-default-coalyGray);
         }
 
         .btn.ghost {
-          background: transparent;
-          color: var(--wtra-text);
-          border-color: var(--wtra-border);
+          background-color: transparent;
+          color: var(--ddd-theme-default-coalyGray);
+          border-color: var(--ddd-theme-default-limestoneLight);
         }
 
         .btn.ghost:hover {
-          background: var(--wtra-surface-alt);
-          border-color: var(--wtra-accent);
+          background-color: white;
         }
 
         .visual {
-          position: relative;
           aspect-ratio: 4 / 5;
-          border-radius: 24px;
+          border-radius: var(--ddd-radius-md);
           overflow: hidden;
-          background: linear-gradient(180deg, var(--wtra-purple-deep), var(--wtra-bark));
-          box-shadow: var(--wtra-shadow);
+          background-color: var(--ddd-theme-default-shrineLight);
         }
 
         .visual img {
@@ -161,56 +124,13 @@ export class NittanyIceHero extends LitElement {
           display: block;
         }
 
-        .badge {
-          position: absolute;
-          top: 18px;
-          left: 18px;
-          background: rgba(245, 239, 224, 0.94);
-          color: var(--wtra-purple-deep);
-          padding: 8px 14px;
-          border-radius: 999px;
-          font-size: 0.76rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-
-        .floater {
-          position: absolute;
-          bottom: 22px;
-          left: 22px;
-          right: 22px;
-          background: rgba(74, 58, 92, 0.82);
-          color: var(--wtra-cream);
-          padding: 16px 18px;
-          border-radius: 14px;
-          display: flex;
-          gap: 14px;
-          align-items: center;
-          font-size: 0.92rem;
-        }
-
-        .floater strong {
-          font-family: var(--wtra-font-display);
-          font-size: 1.06rem;
-          font-weight: 600;
-          display: block;
-          margin-bottom: 2px;
-        }
-
-        .floater span {
-          opacity: 0.86;
-        }
-
-        @media (max-width: 880px) {
+        @media (max-width: 760px) {
           .wrap {
             grid-template-columns: 1fr;
-            padding: 64px 24px 72px;
-            gap: 36px;
+            padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
           }
           .visual {
             aspect-ratio: 4 / 3;
-            max-height: 460px;
           }
         }
       `
@@ -237,11 +157,6 @@ export class NittanyIceHero extends LitElement {
 
   render() {
     return html`
-      <div class="bg" aria-hidden="true"></div>
-      <svg class="ridges" aria-hidden="true" viewBox="0 0 1440 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,420 L160,360 L320,400 L520,300 L760,380 L980,310 L1200,370 L1440,330 L1440,600 L0,600 Z" fill="#4A3A5C" opacity="0.32"></path>
-        <path d="M0,500 L200,440 L420,470 L640,410 L860,460 L1080,420 L1280,460 L1440,430 L1440,600 L0,600 Z" fill="#6B4423" opacity="0.28"></path>
-      </svg>
       <div class="wrap">
         <div>
           <div class="eyebrow">${this.eyebrow}</div>
@@ -249,18 +164,11 @@ export class NittanyIceHero extends LitElement {
           <p>${this.copy}</p>
           <div class="actions">
             <a class="btn primary" href="?page=join" @click=${this._goJoin}>Become a member</a>
-            <a class="btn ghost" href="?page=schedule" @click=${this._goSchedule}>View race schedule</a>
+            <a class="btn ghost" href="?page=schedule" @click=${this._goSchedule}>View schedule</a>
           </div>
         </div>
         <div class="visual">
-          <span class="badge">2026 Season</span>
           <img src=${this.image} alt=${this.imagealt} loading="eager" />
-          <div class="floater">
-            <div>
-              <strong>Spring Wildflower 25K</strong>
-              <span>May 2 · Cedar Hollow · Registration open</span>
-            </div>
-          </div>
         </div>
       </div>
     `;

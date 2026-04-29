@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceScheduleBand extends LitElement {
+export class NittanyIceScheduleBand extends DDD {
 
   static get tag() {
     return "nittany-ice-schedule-band";
@@ -19,90 +20,82 @@ export class NittanyIceScheduleBand extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
+          font-family: var(--ddd-font-primary);
         }
 
         .band {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: var(--ddd-spacing-2);
         }
 
         .row {
           display: grid;
-          grid-template-columns: 110px 2fr 1.5fr 110px 130px;
+          grid-template-columns: 100px 2fr 1.5fr 100px 110px;
           align-items: center;
-          gap: 18px;
-          padding: 18px 22px;
-          background: var(--wtra-surface);
-          border: 1px solid var(--wtra-border);
-          border-radius: 14px;
-          transition: transform 0.18s ease, border-color 0.18s ease;
-        }
-
-        .row:hover {
-          transform: translateX(4px);
-          border-color: var(--wtra-accent);
+          gap: var(--ddd-spacing-4);
+          padding: var(--ddd-spacing-4);
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-radius: var(--ddd-radius-sm);
         }
 
         .date {
-          font-family: var(--wtra-font-display);
-          font-weight: 600;
-          font-size: 1.05rem;
-          color: var(--wtra-accent);
-          letter-spacing: 0.005em;
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-original87Pink);
+          font-size: var(--ddd-font-size-s);
         }
 
         .name {
-          font-family: var(--wtra-font-display);
-          font-weight: 600;
-          font-size: 1.08rem;
-          color: var(--wtra-text);
-          letter-spacing: -0.005em;
+          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-coalyGray);
+          font-size: var(--ddd-font-size-s);
         }
 
         .loc {
-          color: var(--wtra-text-muted);
-          font-size: 0.94rem;
+          color: var(--ddd-theme-default-coalyGray);
+          font-size: var(--ddd-font-size-3xs);
         }
 
         .dist {
-          background: var(--wtra-surface-alt);
-          color: var(--wtra-text);
-          font-weight: 700;
-          font-size: 0.84rem;
-          padding: 6px 12px;
-          border-radius: 999px;
+          background-color: var(--ddd-theme-default-shrineLight);
+          color: var(--ddd-theme-default-coalyGray);
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-3xs);
+          padding: var(--ddd-spacing-1) var(--ddd-spacing-3);
+          border-radius: var(--ddd-radius-rounded);
           text-align: center;
           justify-self: start;
-          letter-spacing: 0.04em;
         }
 
         .level {
           text-transform: uppercase;
-          letter-spacing: 0.14em;
-          font-size: 0.74rem;
-          color: var(--wtra-accent-2);
-          font-weight: 700;
+          letter-spacing: 0.05em;
+          font-size: var(--ddd-font-size-3xs);
+          color: var(--ddd-theme-default-coalyGray);
+          font-weight: var(--ddd-font-weight-bold);
           text-align: right;
         }
 
         .empty {
           text-align: center;
-          padding: 32px;
-          color: var(--wtra-text-muted);
-          background: var(--wtra-surface);
-          border-radius: 14px;
-          border: 1px dashed var(--wtra-border);
+          padding: var(--ddd-spacing-8);
+          color: var(--ddd-theme-default-coalyGray);
+          background-color: white;
+          border: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+          border-radius: var(--ddd-radius-sm);
         }
 
         @media (max-width: 760px) {
           .row {
             grid-template-columns: 1fr;
-            gap: 8px;
-            padding: 18px 20px;
+            gap: var(--ddd-spacing-2);
           }
           .level, .dist {
             justify-self: start;
@@ -127,7 +120,7 @@ export class NittanyIceScheduleBand extends LitElement {
 
   render() {
     if (!this.events || this.events.length === 0) {
-      return html`<div class="empty">Race calendar coming soon — check back shortly.</div>`;
+      return html`<div class="empty">Race calendar coming soon.</div>`;
     }
     return html`
       <div class="band">

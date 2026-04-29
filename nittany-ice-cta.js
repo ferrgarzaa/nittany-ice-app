@@ -1,6 +1,7 @@
-import { LitElement, html, css } from "lit";
+import { html, css } from "lit";
+import { DDD } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NittanyIceCta extends LitElement {
+export class NittanyIceCta extends DDD {
 
   static get tag() {
     return "nittany-ice-cta";
@@ -10,7 +11,7 @@ export class NittanyIceCta extends LitElement {
     super();
     this.eyebrow = "Membership";
     this.heading = "Find your home on the trail.";
-    this.copy = "Join 1,200+ runners across the Wildhorn region. Members get priority race registration, weekly group runs, training plan discounts, and a welcome pack.";
+    this.copy = "Join 1,200+ runners across the Wildhorn region. Members get priority race registration, weekly group runs, and a welcome pack.";
     this.primarylabel = "Become a member";
     this.primarypage = "join";
     this.secondarylabel = "Browse races";
@@ -31,108 +32,80 @@ export class NittanyIceCta extends LitElement {
 
   static get styles() {
     return [
+      super.styles,
       css`
         :host {
           display: block;
-          padding: 32px 24px 72px;
+          padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
+          font-family: var(--ddd-font-primary);
         }
 
         .panel {
-          max-width: 1100px;
+          max-width: 1000px;
           margin: 0 auto;
-          background: linear-gradient(135deg, var(--wtra-purple-deep), var(--wtra-green-deep));
-          color: var(--wtra-cream);
-          border-radius: 24px;
-          padding: 60px 52px;
-          display: grid;
-          grid-template-columns: 1.4fr 1fr;
-          gap: 40px;
-          align-items: center;
-          position: relative;
-          overflow: hidden;
-          box-shadow: var(--wtra-shadow);
-        }
-
-        .panel::before {
-          content: "";
-          position: absolute;
-          right: -90px;
-          top: -90px;
-          width: 320px;
-          height: 320px;
-          background: radial-gradient(circle, rgba(245, 239, 224, 0.18), transparent 65%);
-          pointer-events: none;
+          background-color: var(--ddd-theme-default-original87Pink);
+          color: white;
+          padding: var(--ddd-spacing-10) var(--ddd-spacing-8);
+          border-radius: var(--ddd-radius-md);
         }
 
         .eyebrow {
           text-transform: uppercase;
-          letter-spacing: 0.18em;
-          font-size: 0.78rem;
-          font-weight: 700;
-          color: var(--wtra-beige);
-          margin-bottom: 12px;
+          letter-spacing: 0.1em;
+          font-size: var(--ddd-font-size-3xs);
+          font-weight: var(--ddd-font-weight-bold);
+          margin-bottom: var(--ddd-spacing-2);
+          opacity: 0.85;
         }
 
         h2 {
-          font-family: var(--wtra-font-display);
-          font-size: clamp(1.8rem, 3.2vw, 2.4rem);
-          margin: 0 0 14px;
-          line-height: 1.1;
-          font-weight: 600;
-          letter-spacing: -0.012em;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-xl);
+          font-weight: var(--ddd-font-weight-bold);
+          margin: 0 0 var(--ddd-spacing-3);
         }
 
         p {
-          margin: 0;
-          line-height: 1.65;
-          opacity: 0.92;
-          max-width: 520px;
+          font-size: var(--ddd-font-size-s);
+          line-height: var(--ddd-lh-150);
+          margin: 0 0 var(--ddd-spacing-5);
+          max-width: 600px;
         }
 
         .buttons {
           display: flex;
-          flex-direction: column;
-          gap: 10px;
+          flex-wrap: wrap;
+          gap: var(--ddd-spacing-3);
         }
 
         a {
           text-decoration: none;
-          text-align: center;
-          padding: 14px 22px;
-          border-radius: 999px;
-          font-weight: 600;
-          font-size: 0.96rem;
-          cursor: pointer;
-          font-family: inherit;
-          display: block;
-          transition: transform 0.15s ease, background 0.15s ease;
+          padding: var(--ddd-spacing-3) var(--ddd-spacing-5);
+          border-radius: var(--ddd-radius-sm);
+          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-3xs);
+          font-family: var(--ddd-font-primary);
+          border: var(--ddd-border-sm);
         }
 
         .primary {
-          background: var(--wtra-cream);
-          color: var(--wtra-purple-deep);
+          background-color: white;
+          color: var(--ddd-theme-default-original87Pink);
+          border-color: white;
         }
 
         .primary:hover {
-          background: #FFFFFF;
-          transform: translateY(-1px);
+          background-color: var(--ddd-theme-default-shrineLight);
         }
 
         .secondary {
-          background: transparent;
-          color: var(--wtra-cream);
-          border: 1px solid rgba(245, 239, 224, 0.4);
+          background-color: transparent;
+          color: white;
+          border-color: white;
         }
 
         .secondary:hover {
-          background: rgba(245, 239, 224, 0.12);
-        }
-
-        @media (max-width: 760px) {
-          .panel {
-            grid-template-columns: 1fr;
-            padding: 44px 28px;
-          }
+          background-color: rgba(255, 255, 255, 0.15);
         }
       `
     ];
@@ -161,11 +134,9 @@ export class NittanyIceCta extends LitElement {
     const secondaryHref = `?page=${this.secondarypage}`;
     return html`
       <section class="panel">
-        <div>
-          <div class="eyebrow">${this.eyebrow}</div>
-          <h2>${this.heading}</h2>
-          <p>${this.copy}</p>
-        </div>
+        <div class="eyebrow">${this.eyebrow}</div>
+        <h2>${this.heading}</h2>
+        <p>${this.copy}</p>
         <div class="buttons">
           <a class="primary" href=${primaryHref} @click=${this._goPrimary}>${this.primarylabel}</a>
           <a class="secondary" href=${secondaryHref} @click=${this._goSecondary}>${this.secondarylabel}</a>
