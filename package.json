@@ -10,8 +10,8 @@
     "serve": "web-dev-server --root-dir dist --node-resolve --open"
   },
   "dependencies": {
-    "lit": "^3.1.0",
-    "@haxtheweb/d-d-d": "^10.0.0"
+    "@haxtheweb/d-d-d": "^10.0.2",
+    "lit": "^3.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
