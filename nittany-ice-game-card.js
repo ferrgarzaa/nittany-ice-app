@@ -18,6 +18,7 @@ export class NittanyIceGameCard extends DDD {
 
   static get properties() {
     return {
+      ...super.properties,
       event: { type: String },
       date: { type: String },
       winner: { type: String },
@@ -32,21 +33,27 @@ export class NittanyIceGameCard extends DDD {
       css`
         :host {
           display: block;
-          font-family: var(--ddd-font-primary);
         }
 
         .card {
-          background-color: white;
+          background: var(--ddd-theme-default-white);
           border: var(--ddd-border-sm);
           border-color: var(--ddd-theme-default-limestoneLight);
-          border-left: var(--ddd-border-lg);
-          border-left-color: var(--ddd-theme-default-original87Pink);
           border-radius: var(--ddd-radius-sm);
-          padding: var(--ddd-spacing-4);
+          padding: var(--ddd-spacing-6);
           height: 100%;
           display: flex;
           flex-direction: column;
-          gap: var(--ddd-spacing-3);
+          gap: var(--ddd-spacing-4);
+          box-shadow: var(--ddd-boxShadow-sm);
+          transition: transform 0.18s ease, border-color 0.18s ease;
+          border-left: 4px solid var(--ddd-theme-default-nittanyNavy);
+        }
+
+        .card:hover {
+          transform: translateY(-3px);
+          border-color: var(--ddd-theme-default-beaverBlue);
+          border-left-color: var(--ddd-theme-default-beaverBlue);
         }
 
         .top {
@@ -58,51 +65,54 @@ export class NittanyIceGameCard extends DDD {
 
         .event {
           font-family: var(--ddd-font-primary);
-          font-size: var(--ddd-font-size-ms);
-          font-weight: var(--ddd-font-weight-bold);
-          color: var(--ddd-theme-default-coalyGray);
+          font-size: var(--ddd-font-size-m);
+          font-weight: 600;
           margin: 0;
-          line-height: var(--ddd-lh-120);
+          line-height: 1.25;
+          color: var(--ddd-theme-default-coalyGray);
         }
 
         .date {
-          font-size: var(--ddd-font-size-3xs);
-          color: var(--ddd-theme-default-coalyGray);
+          font-size: var(--ddd-font-size-4xs);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          font-weight: var(--ddd-font-weight-bold);
+          letter-spacing: 0.14em;
+          color: var(--ddd-theme-default-potentialMidnight);
           white-space: nowrap;
+          font-weight: 600;
         }
 
         .row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: var(--ddd-spacing-3);
-          padding-top: var(--ddd-spacing-3);
+          gap: var(--ddd-spacing-4);
+          padding-top: var(--ddd-spacing-4);
           border-top: var(--ddd-border-sm);
-          border-top-color: var(--ddd-theme-default-limestoneLight);
+          border-color: var(--ddd-theme-default-limestoneLight);
         }
 
         .label {
-          font-size: var(--ddd-font-size-3xs);
+          font-size: var(--ddd-font-size-4xs);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--ddd-theme-default-coalyGray);
+          letter-spacing: 0.14em;
+          color: var(--ddd-theme-default-potentialMidnight);
           margin-bottom: var(--ddd-spacing-1);
+          font-weight: 600;
         }
 
         .val {
+          font-family: var(--ddd-font-primary);
+          font-weight: 600;
           font-size: var(--ddd-font-size-s);
-          font-weight: var(--ddd-font-weight-bold);
           color: var(--ddd-theme-default-coalyGray);
         }
 
         .footer {
+          margin-top: auto;
           font-size: var(--ddd-font-size-3xs);
-          color: var(--ddd-theme-default-original87Pink);
-          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-beaverBlue);
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.1em;
         }
       `
     ];

@@ -14,6 +14,7 @@ export class NittanyIceStatBand extends DDD {
 
   static get properties() {
     return {
+      ...super.properties,
       stats: { type: Array },
     };
   }
@@ -24,43 +25,62 @@ export class NittanyIceStatBand extends DDD {
       css`
         :host {
           display: block;
-          background-color: white;
-          padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
+          padding: var(--ddd-spacing-14) var(--ddd-spacing-6);
+          background: var(--ddd-theme-default-limestoneMaxLight);
           border-top: var(--ddd-border-sm);
-          border-top-color: var(--ddd-theme-default-limestoneLight);
           border-bottom: var(--ddd-border-sm);
-          border-bottom-color: var(--ddd-theme-default-limestoneLight);
-          font-family: var(--ddd-font-primary);
+          border-color: var(--ddd-theme-default-limestoneLight);
         }
 
         .grid {
-          max-width: 1100px;
+          max-width: 1240px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-          gap: var(--ddd-spacing-5);
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: var(--ddd-spacing-7);
           text-align: center;
         }
 
         .stat {
-          padding: var(--ddd-spacing-3);
+          display: flex;
+          flex-direction: column;
+          gap: var(--ddd-spacing-1);
+          padding: var(--ddd-spacing-4) var(--ddd-spacing-3);
+          border-left: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
+        }
+
+        .stat:first-child {
+          border-left: none;
         }
 
         .num {
           font-family: var(--ddd-font-primary);
-          font-size: var(--ddd-font-size-xl);
-          font-weight: var(--ddd-font-weight-bold);
-          color: var(--ddd-theme-default-original87Pink);
+          font-size: var(--ddd-font-size-l);
+          font-weight: 700;
+          color: var(--ddd-theme-default-beaverBlue);
           line-height: 1;
-          margin-bottom: var(--ddd-spacing-2);
         }
 
         .label {
           font-size: var(--ddd-font-size-3xs);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--ddd-theme-default-coalyGray);
-          font-weight: var(--ddd-font-weight-bold);
+          letter-spacing: 0.16em;
+          color: var(--ddd-theme-default-potentialMidnight);
+          font-weight: 600;
+        }
+
+        @media (max-width: 720px) {
+          .stat {
+            border-left: none;
+            border-top: var(--ddd-border-sm);
+            border-color: var(--ddd-theme-default-limestoneLight);
+            padding-top: var(--ddd-spacing-5);
+          }
+          .stat:first-child {
+            border-top: none;
+            padding-top: 0;
+          }
         }
       `
     ];

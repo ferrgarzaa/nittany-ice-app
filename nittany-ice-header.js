@@ -16,6 +16,7 @@ export class NittanyIceHeader extends DDD {
 
   static get properties() {
     return {
+      ...super.properties,
       title: { type: String },
       subtitle: { type: String },
     };
@@ -27,21 +28,22 @@ export class NittanyIceHeader extends DDD {
       css`
         :host {
           display: block;
-          background-color: white;
-          border-bottom: var(--ddd-border-sm);
-          border-color: var(--ddd-theme-default-limestoneLight);
           position: sticky;
           top: 0;
           z-index: 50;
+          background: var(--ddd-theme-default-shrineMaxLight);
+          border-bottom: var(--ddd-border-sm);
+          border-color: var(--ddd-theme-default-limestoneLight);
         }
 
         header {
-          max-width: 1100px;
+          max-width: 1240px;
           margin: 0 auto;
-          padding: var(--ddd-spacing-3) var(--ddd-spacing-5);
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: var(--ddd-spacing-3) var(--ddd-spacing-6);
+          gap: var(--ddd-spacing-4);
         }
 
         .brand {
@@ -51,41 +53,45 @@ export class NittanyIceHeader extends DDD {
           background: none;
           border: none;
           padding: 0;
+          color: var(--ddd-theme-default-coalyGray);
           cursor: pointer;
           font-family: var(--ddd-font-primary);
-          color: var(--ddd-theme-default-coalyGray);
         }
 
         .mark {
           width: 40px;
           height: 40px;
-          background-color: var(--ddd-theme-default-original87Pink);
-          color: white;
-          border-radius: var(--ddd-radius-circle);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: var(--ddd-font-weight-bold);
+          border-radius: 50%;
+          background: var(--ddd-theme-default-nittanyNavy);
+          display: grid;
+          place-items: center;
+          color: var(--ddd-theme-default-shrineMaxLight);
+          font-family: var(--ddd-font-primary);
+          font-weight: 700;
           font-size: var(--ddd-font-size-s);
+          flex-shrink: 0;
         }
 
         .name {
           display: flex;
           flex-direction: column;
+          line-height: 1.05;
           text-align: left;
         }
 
         .name strong {
+          font-family: var(--ddd-font-primary);
           font-size: var(--ddd-font-size-s);
-          font-weight: var(--ddd-font-weight-bold);
+          font-weight: 700;
           color: var(--ddd-theme-default-coalyGray);
         }
 
         .name span {
-          font-size: var(--ddd-font-size-3xs);
-          color: var(--ddd-theme-default-coalyGray);
+          font-size: var(--ddd-font-size-4xs);
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.18em;
+          color: var(--ddd-theme-default-potentialMidnight);
+          margin-top: var(--ddd-spacing-1);
         }
 
         @media (max-width: 540px) {
@@ -109,8 +115,8 @@ export class NittanyIceHeader extends DDD {
   render() {
     return html`
       <header>
-        <button class="brand" @click=${this._goHome} aria-label="Go to home">
-          <span class="mark">W</span>
+        <button class="brand" @click=${this._goHome} aria-label="Wildhorn TRA home">
+          <span class="mark" aria-hidden="true">W</span>
           <span class="name">
             <strong>${this.title}</strong>
             <span>${this.subtitle}</span>

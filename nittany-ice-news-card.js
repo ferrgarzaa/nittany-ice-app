@@ -19,6 +19,7 @@ export class NittanyIceNewsCard extends DDD {
 
   static get properties() {
     return {
+      ...super.properties,
       category: { type: String },
       date: { type: String },
       title: { type: String },
@@ -34,11 +35,10 @@ export class NittanyIceNewsCard extends DDD {
       css`
         :host {
           display: block;
-          font-family: var(--ddd-font-primary);
         }
 
         .card {
-          background-color: white;
+          background: var(--ddd-theme-default-white);
           border: var(--ddd-border-sm);
           border-color: var(--ddd-theme-default-limestoneLight);
           border-radius: var(--ddd-radius-sm);
@@ -46,11 +46,19 @@ export class NittanyIceNewsCard extends DDD {
           height: 100%;
           display: flex;
           flex-direction: column;
+          box-shadow: var(--ddd-boxShadow-sm);
+          transition: transform 0.18s ease, border-color 0.18s ease;
+        }
+
+        .card:hover {
+          transform: translateY(-3px);
+          border-color: var(--ddd-theme-default-beaverBlue);
         }
 
         .media {
           aspect-ratio: 16 / 10;
-          background-color: var(--ddd-theme-default-shrineLight);
+          overflow: hidden;
+          background: var(--ddd-theme-default-limestoneMaxLight);
         }
 
         .media img {
@@ -58,10 +66,15 @@ export class NittanyIceNewsCard extends DDD {
           height: 100%;
           object-fit: cover;
           display: block;
+          transition: transform 0.5s ease;
+        }
+
+        .card:hover .media img {
+          transform: scale(1.05);
         }
 
         .body {
-          padding: var(--ddd-spacing-4);
+          padding: var(--ddd-spacing-5);
           display: flex;
           flex-direction: column;
           gap: var(--ddd-spacing-2);
@@ -71,45 +84,48 @@ export class NittanyIceNewsCard extends DDD {
         .meta {
           display: flex;
           gap: var(--ddd-spacing-2);
-          font-size: var(--ddd-font-size-3xs);
-          color: var(--ddd-theme-default-coalyGray);
+          align-items: center;
+          font-size: var(--ddd-font-size-4xs);
+          color: var(--ddd-theme-default-potentialMidnight);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.14em;
+          font-weight: 600;
         }
 
         .meta .cat {
-          color: var(--ddd-theme-default-original87Pink);
-          font-weight: var(--ddd-font-weight-bold);
+          color: var(--ddd-theme-default-beaverBlue);
+          font-weight: 700;
         }
 
         h3 {
           font-family: var(--ddd-font-primary);
-          font-size: var(--ddd-font-size-ms);
-          font-weight: var(--ddd-font-weight-bold);
-          color: var(--ddd-theme-default-coalyGray);
           margin: 0;
-          line-height: var(--ddd-lh-120);
+          font-size: var(--ddd-font-size-m);
+          line-height: 1.3;
+          font-weight: 600;
+          color: var(--ddd-theme-default-coalyGray);
         }
 
         p {
-          font-size: var(--ddd-font-size-3xs);
-          color: var(--ddd-theme-default-coalyGray);
-          line-height: var(--ddd-lh-150);
           margin: 0;
+          color: var(--ddd-theme-default-potentialMidnight);
+          line-height: 1.6;
+          font-size: var(--ddd-font-size-xxs);
           flex: 1;
         }
 
         a {
-          color: var(--ddd-theme-default-original87Pink);
+          color: var(--ddd-theme-default-beaverBlue);
+          font-weight: 700;
           text-decoration: none;
-          font-weight: var(--ddd-font-weight-bold);
           font-size: var(--ddd-font-size-3xs);
+          margin-top: var(--ddd-spacing-1);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.1em;
         }
 
         a:hover {
-          text-decoration: underline;
+          color: var(--ddd-theme-default-nittanyNavy);
         }
       `
     ];
@@ -142,7 +158,11 @@ export class NittanyIceNewsCard extends DDD {
     if (!this.image) {
       return null;
     }
-    return html`<div class="media"><img src=${this.image} alt=${this.title} loading="lazy" /></div>`;
+    return html`
+      <div class="media">
+        <img src=${this.image} alt=${this.title} loading="lazy" />
+      </div>
+    `;
   }
 
   _renderCategory() {

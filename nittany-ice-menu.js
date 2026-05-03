@@ -19,6 +19,7 @@ export class NittanyIceMenu extends DDD {
 
   static get properties() {
     return {
+      ...super.properties,
       open: { type: Boolean, reflect: true },
       items: { type: Array },
       currentPage: { type: String },
@@ -39,7 +40,9 @@ export class NittanyIceMenu extends DDD {
           this.items = data.items;
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      // keep fallback items
+    }
   }
 
   _fallbackItems() {
@@ -62,39 +65,69 @@ export class NittanyIceMenu extends DDD {
         :host {
           display: block;
           position: relative;
-          font-family: var(--ddd-font-primary);
         }
 
         .toggle {
-          background-color: white;
+          background: transparent;
           border: var(--ddd-border-sm);
           border-color: var(--ddd-theme-default-limestoneLight);
           color: var(--ddd-theme-default-coalyGray);
           padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
-          border-radius: var(--ddd-radius-sm);
+          border-radius: var(--ddd-radius-rounded);
           cursor: pointer;
-          font-family: var(--ddd-font-primary);
-          font-size: var(--ddd-font-size-3xs);
-          font-weight: var(--ddd-font-weight-medium);
+          font: inherit;
+          font-size: var(--ddd-font-size-xxs);
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: var(--ddd-spacing-2);
         }
 
         .toggle:hover {
-          background-color: var(--ddd-theme-default-shrineLight);
+          background: var(--ddd-theme-default-limestoneMaxLight);
+          border-color: var(--ddd-theme-default-beaverBlue);
+        }
+
+        .bars {
+          display: inline-flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .bars span {
+          width: 16px;
+          height: 2px;
+          background: var(--ddd-theme-default-coalyGray);
+          border-radius: 2px;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        :host([open]) .bars span:nth-child(1) {
+          transform: translateY(5px) rotate(45deg);
+        }
+
+        :host([open]) .bars span:nth-child(2) {
+          opacity: 0;
+        }
+
+        :host([open]) .bars span:nth-child(3) {
+          transform: translateY(-5px) rotate(-45deg);
         }
 
         nav {
           position: absolute;
           top: 100%;
           right: 0;
-          margin-top: var(--ddd-spacing-2);
-          background-color: white;
+          margin-top: var(--ddd-spacing-3);
+          background: var(--ddd-theme-default-white);
           border: var(--ddd-border-sm);
           border-color: var(--ddd-theme-default-limestoneLight);
           border-radius: var(--ddd-radius-sm);
           padding: var(--ddd-spacing-2);
-          min-width: 220px;
+          min-width: 240px;
           display: none;
           flex-direction: column;
+          gap: 2px;
         }
 
         :host([open]) nav {
@@ -104,33 +137,36 @@ export class NittanyIceMenu extends DDD {
         a {
           color: var(--ddd-theme-default-coalyGray);
           text-decoration: none;
-          font-size: var(--ddd-font-size-3xs);
+          font-size: var(--ddd-font-size-xxs);
+          font-weight: 500;
           padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
           border-radius: var(--ddd-radius-xs);
           display: block;
+          transition: background 0.15s ease, color 0.15s ease;
         }
 
         a:hover {
-          background-color: var(--ddd-theme-default-shrineLight);
-          color: var(--ddd-theme-default-original87Pink);
+          background: var(--ddd-theme-default-limestoneMaxLight);
+          color: var(--ddd-theme-default-beaverBlue);
         }
 
         a.active {
-          color: var(--ddd-theme-default-original87Pink);
-          font-weight: var(--ddd-font-weight-bold);
+          background: var(--ddd-theme-default-limestoneMaxLight);
+          color: var(--ddd-theme-default-beaverBlue);
+          font-weight: 600;
         }
 
         a.cta {
-          background-color: var(--ddd-theme-default-original87Pink);
-          color: white;
-          text-align: center;
+          background: var(--ddd-theme-default-nittanyNavy);
+          color: var(--ddd-theme-default-shrineMaxLight);
           margin-top: var(--ddd-spacing-2);
-          font-weight: var(--ddd-font-weight-bold);
+          text-align: center;
+          font-weight: 600;
         }
 
         a.cta:hover {
-          background-color: var(--ddd-theme-default-coalyGray);
-          color: white;
+          background: var(--ddd-theme-default-beaverBlue);
+          color: var(--ddd-theme-default-shrineMaxLight);
         }
 
         @media (min-width: 920px) {
@@ -145,12 +181,18 @@ export class NittanyIceMenu extends DDD {
             padding: 0;
             background: transparent;
             border: none;
-            min-width: 0;
             gap: var(--ddd-spacing-1);
+            align-items: center;
+            min-width: 0;
+          }
+          a {
+            padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
           }
           a.cta {
             margin-top: 0;
             margin-left: var(--ddd-spacing-2);
+            padding: var(--ddd-spacing-2) var(--ddd-spacing-4);
+            border-radius: var(--ddd-radius-rounded);
           }
         }
       `
@@ -198,8 +240,16 @@ export class NittanyIceMenu extends DDD {
 
   render() {
     return html`
-      <button class="toggle" @click=${this._toggle} aria-expanded=${this.open}>Menu</button>
-      <nav aria-label="Primary">
+      <button
+        class="toggle"
+        @click=${this._toggle}
+        aria-expanded=${this.open}
+        aria-label="Toggle menu"
+      >
+        <span class="bars" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <nav id="wtra-menu" aria-label="Primary">
         ${this.items.map((item) => this._renderItem(item))}
       </nav>
     `;

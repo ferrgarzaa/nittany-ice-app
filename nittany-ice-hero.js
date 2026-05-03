@@ -11,13 +11,14 @@ export class NittanyIceHero extends DDD {
     super();
     this.eyebrow = "Trail Running Association";
     this.heading = "Run wild. Run free. Run together.";
-    this.copy = "We are a community of trail runners, coaches, and stewards racing the ridgelines of the Wildhorn region.";
+    this.copy = "We are a community of trail runners, coaches, and stewards racing the ridgelines of the Wildhorn region — and protecting them, mile by mile.";
     this.image = "https://i.pinimg.com/736x/91/ae/62/91ae626dba61c220cf4956f8e7115913.jpg";
-    this.imagealt = "A trail runner on a mountain ridge";
+    this.imagealt = "A trail runner ascending a mountain ridge at sunrise";
   }
 
   static get properties() {
     return {
+      ...super.properties,
       eyebrow: { type: String },
       heading: { type: String },
       copy: { type: String },
@@ -32,43 +33,57 @@ export class NittanyIceHero extends DDD {
       css`
         :host {
           display: block;
-          background-color: var(--ddd-theme-default-shrineMaxLight);
-          font-family: var(--ddd-font-primary);
+          position: relative;
+          overflow: hidden;
+          background: var(--ddd-theme-default-shrineMaxLight);
         }
 
         .wrap {
-          max-width: 1100px;
+          position: relative;
+          max-width: 1240px;
           margin: 0 auto;
-          padding: var(--ddd-spacing-12) var(--ddd-spacing-5);
+          padding: var(--ddd-spacing-24) var(--ddd-spacing-6) var(--ddd-spacing-28);
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--ddd-spacing-8);
+          grid-template-columns: 1.05fr 1fr;
           align-items: center;
+          gap: var(--ddd-spacing-14);
         }
 
         .eyebrow {
           text-transform: uppercase;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.18em;
           font-size: var(--ddd-font-size-3xs);
-          font-weight: var(--ddd-font-weight-bold);
-          color: var(--ddd-theme-default-original87Pink);
-          margin-bottom: var(--ddd-spacing-3);
+          color: var(--ddd-theme-default-beaverBlue);
+          font-weight: 700;
+          margin-bottom: var(--ddd-spacing-4);
+          display: flex;
+          align-items: center;
+          gap: var(--ddd-spacing-3);
+        }
+
+        .eyebrow::before {
+          content: "";
+          width: 28px;
+          height: 1px;
+          background: var(--ddd-theme-default-beaverBlue);
+          display: inline-block;
         }
 
         h1 {
           font-family: var(--ddd-font-primary);
-          font-size: var(--ddd-font-size-xxl);
-          font-weight: var(--ddd-font-weight-bold);
+          font-size: var(--ddd-font-size-xl);
+          line-height: 1.04;
+          margin: 0 0 var(--ddd-spacing-5);
           color: var(--ddd-theme-default-coalyGray);
-          margin: 0 0 var(--ddd-spacing-4);
-          line-height: var(--ddd-lh-110);
+          font-weight: 600;
         }
 
         p {
+          max-width: 540px;
+          color: var(--ddd-theme-default-potentialMidnight);
           font-size: var(--ddd-font-size-s);
-          color: var(--ddd-theme-default-coalyGray);
-          line-height: var(--ddd-lh-150);
-          margin: 0 0 var(--ddd-spacing-5);
+          line-height: 1.65;
+          margin: 0 0 var(--ddd-spacing-7);
         }
 
         .actions {
@@ -78,43 +93,49 @@ export class NittanyIceHero extends DDD {
         }
 
         .btn {
-          font-family: var(--ddd-font-primary);
+          font-family: inherit;
           padding: var(--ddd-spacing-3) var(--ddd-spacing-5);
-          border-radius: var(--ddd-radius-sm);
-          font-weight: var(--ddd-font-weight-bold);
-          font-size: var(--ddd-font-size-3xs);
+          border-radius: var(--ddd-radius-rounded);
+          font-weight: 600;
+          font-size: var(--ddd-font-size-xxs);
           cursor: pointer;
-          text-decoration: none;
           border: var(--ddd-border-sm);
-          display: inline-block;
+          border-color: transparent;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: var(--ddd-spacing-2);
+          transition: transform 0.15s ease, background 0.15s ease;
         }
 
         .btn.primary {
-          background-color: var(--ddd-theme-default-original87Pink);
-          color: white;
-          border-color: var(--ddd-theme-default-original87Pink);
+          background: var(--ddd-theme-default-nittanyNavy);
+          color: var(--ddd-theme-default-shrineMaxLight);
         }
 
         .btn.primary:hover {
-          background-color: var(--ddd-theme-default-coalyGray);
-          border-color: var(--ddd-theme-default-coalyGray);
+          background: var(--ddd-theme-default-beaverBlue);
+          transform: translateY(-1px);
         }
 
         .btn.ghost {
-          background-color: transparent;
+          background: transparent;
           color: var(--ddd-theme-default-coalyGray);
           border-color: var(--ddd-theme-default-limestoneLight);
         }
 
         .btn.ghost:hover {
-          background-color: white;
+          background: var(--ddd-theme-default-limestoneMaxLight);
+          border-color: var(--ddd-theme-default-beaverBlue);
         }
 
         .visual {
+          position: relative;
           aspect-ratio: 4 / 5;
           border-radius: var(--ddd-radius-md);
           overflow: hidden;
-          background-color: var(--ddd-theme-default-shrineLight);
+          background: var(--ddd-theme-default-nittanyNavy);
+          box-shadow: var(--ddd-boxShadow-md);
         }
 
         .visual img {
@@ -124,13 +145,56 @@ export class NittanyIceHero extends DDD {
           display: block;
         }
 
-        @media (max-width: 760px) {
+        .badge {
+          position: absolute;
+          top: var(--ddd-spacing-4);
+          left: var(--ddd-spacing-4);
+          background: var(--ddd-theme-default-shrineMaxLight);
+          color: var(--ddd-theme-default-nittanyNavy);
+          padding: var(--ddd-spacing-2) var(--ddd-spacing-3);
+          border-radius: var(--ddd-radius-rounded);
+          font-size: var(--ddd-font-size-4xs);
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .floater {
+          position: absolute;
+          bottom: var(--ddd-spacing-5);
+          left: var(--ddd-spacing-5);
+          right: var(--ddd-spacing-5);
+          background: var(--ddd-theme-default-nittanyNavy);
+          color: var(--ddd-theme-default-shrineMaxLight);
+          padding: var(--ddd-spacing-4);
+          border-radius: var(--ddd-radius-sm);
+          display: flex;
+          gap: var(--ddd-spacing-3);
+          align-items: center;
+          font-size: var(--ddd-font-size-xxs);
+        }
+
+        .floater strong {
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-s);
+          font-weight: 600;
+          display: block;
+          margin-bottom: 2px;
+        }
+
+        .floater span {
+          opacity: 0.86;
+        }
+
+        @media (max-width: 880px) {
           .wrap {
             grid-template-columns: 1fr;
-            padding: var(--ddd-spacing-8) var(--ddd-spacing-5);
+            padding: var(--ddd-spacing-16) var(--ddd-spacing-6) var(--ddd-spacing-18);
+            gap: var(--ddd-spacing-9);
           }
           .visual {
             aspect-ratio: 4 / 3;
+            max-height: 460px;
           }
         }
       `
@@ -164,11 +228,18 @@ export class NittanyIceHero extends DDD {
           <p>${this.copy}</p>
           <div class="actions">
             <a class="btn primary" href="?page=join" @click=${this._goJoin}>Become a member</a>
-            <a class="btn ghost" href="?page=schedule" @click=${this._goSchedule}>View schedule</a>
+            <a class="btn ghost" href="?page=schedule" @click=${this._goSchedule}>View race schedule</a>
           </div>
         </div>
         <div class="visual">
+          <span class="badge">2026 Season</span>
           <img src=${this.image} alt=${this.imagealt} loading="eager" />
+          <div class="floater">
+            <div>
+              <strong>Spring Wildflower 25K</strong>
+              <span>May 2 · Cedar Hollow · Registration open</span>
+            </div>
+          </div>
         </div>
       </div>
     `;
